@@ -113,7 +113,59 @@ def get_offer_ids(client_id, seller_token):
 
 
 def update_price(prices: list, client_id, seller_token):
-    """Обновить цены товаров"""
+    """Обновить цены товаров.
+
+    Позволяет изменить цену одного или нескольких товаров,
+    где prices: list - формируется в функции create_prices
+
+    Example:
+        >>> update_price(prices: list, s12542, s.XXXX)
+        POST:
+        {
+          "prices": [
+            {
+              "auto_action_enabled": "UNKNOWN",
+              "auto_add_to_ozon_actions_list_enabled": "UNKNOWN",
+              "currency_code": "RUB",
+              "manage_elastic_boosting_through_price": true,
+              "min_price": "800",
+              "min_price_for_auto_actions_enabled": true,
+              "net_price": "650",
+              "offer_id": "",
+              "old_price": "0",
+              "price": "1448",
+              "price_strategy_enabled": "UNKNOWN",
+              "product_id": 1386,
+              "quant_size": 1,
+              "vat": "0.1"
+            }
+          ]
+        }
+        --
+        Result:
+        {
+          "result": [
+            {
+              "product_id": 1386,
+              "offer_id": "PH8865",
+              "updated": true,
+              "errors": []
+            }
+          ]
+        }
+
+    Args:
+        client_id: Идентификатор клиента
+        seller_token: API-ключ
+        prices: информация о ценах товаров.
+
+    Returns:
+        [result]: словарь, содержащий список тваров с измененной стоимостью
+
+    Note:
+        - Возвращает измененную стоимость товаров
+        - в случае ошибки будет выброшено исключение.
+    """
     url = "https://api-seller.ozon.ru/v1/product/import/prices"
     headers = {
         "Client-Id": client_id,
