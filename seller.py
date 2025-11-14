@@ -507,6 +507,24 @@ async def upload_stocks(watch_remnants, client_id, seller_token):
 
 
 def main():
+    """Запуск функций для создания и обновления списка товаров и цен.
+
+    1. Функция читает переменные окружения и передает в вызываемые функции:
+        - client_id (идентификатор клиента)
+        - seller_token (API-ключ)
+    2. Функция обрабатывает исключения, которые могут возникнуть в процессе
+       работы вызываемых функций.
+
+    Args:
+        []
+
+    Returns:
+        [stocks]: возвращает количество товаров Casio
+
+    Note:
+        []
+
+    """    
     env = Env()
     seller_token = env.str("SELLER_TOKEN")
     client_id = env.str("CLIENT_ID")
