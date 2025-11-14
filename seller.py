@@ -464,11 +464,11 @@ async def upload_prices(watch_remnants, client_id, seller_token):
         seller_token: API-ключ
 
     Returns:
-        [prices]: возвращает стоимость на товары cisco
+        [prices]: возвращает стоимость на товары Casio
 
     Note:
         - Стоимоть товаров с учетом обновления;
-        - список разделен на 1000 элеметов.
+        - список разделен по 1000 элеметов.
     """
     offer_ids = get_offer_ids(client_id, seller_token)
     prices = create_prices(watch_remnants, offer_ids)
@@ -478,6 +478,26 @@ async def upload_prices(watch_remnants, client_id, seller_token):
 
 
 async def upload_stocks(watch_remnants, client_id, seller_token):
+    """Обновляет количество товаров.
+
+    Функция позволяет обновить количество товаров Cisco на сайте озон.
+
+    Example:
+        >>> upload_stocks(watch_remnants, client_id, seller_token)
+
+    Args:
+        watch_remnants: Список цен для товаров Casio
+        client_id: Идентификатор клиента
+        seller_token: API-ключ
+
+    Returns:
+        [stocks]: возвращает количество товаров Casio
+
+    Note:
+        - Количество товаров с учетом обновления;
+        - только при условии, что количество товаров не равно 0;
+        - список разделен по 100 элеметов.
+    """
     offer_ids = get_offer_ids(client_id, seller_token)
     stocks = create_stocks(watch_remnants, offer_ids)
     for some_stock in list(divide(stocks, 100)):
