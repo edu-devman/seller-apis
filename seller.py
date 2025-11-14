@@ -451,6 +451,25 @@ def divide(lst: list, n: int):
 
 
 async def upload_prices(watch_remnants, client_id, seller_token):
+    """Обновляет цену.
+
+    Функция позволяет обновить цены на товары Cisco на сайте озон.
+
+    Example:
+        >>> upload_prices(watch_remnants, client_id, seller_token)
+
+    Args:
+        watch_remnants: Список цен для товаров Casio
+        client_id: Идентификатор клиента
+        seller_token: API-ключ
+
+    Returns:
+        [prices]: возвращает стоимость на товары cisco
+
+    Note:
+        - Стоимоть товаров с учетом обновления;
+        - список разделен на 1000 элеметов.
+    """
     offer_ids = get_offer_ids(client_id, seller_token)
     prices = create_prices(watch_remnants, offer_ids)
     for some_price in list(divide(prices, 1000)):
