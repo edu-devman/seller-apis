@@ -142,7 +142,7 @@ def update_price(prices: list, client_id, seller_token):
           ]
         }
         --
-        Result:
+        RESULT:
         {
           "result": [
             {
@@ -160,7 +160,7 @@ def update_price(prices: list, client_id, seller_token):
         prices: информация о ценах товаров.
 
     Returns:
-        [result]: словарь, содержащий список тваров с измененной стоимостью
+        [result]: Изменение стоимости товара/ов
 
     Note:
         - Возвращает измененную стоимость товаров
@@ -178,7 +178,53 @@ def update_price(prices: list, client_id, seller_token):
 
 
 def update_stocks(stocks: list, client_id, seller_token):
-    """Обновить остатки"""
+    """Обновить остатки
+
+    Позволяет изменить информацию о количестве товара в наличии,
+    где prices: list - формируется в функции create_stocks
+
+    Важно: Метод будет отключён 27 мая 2025 года. Переключитесь
+    на /v2/products/stocks
+
+    Example:
+        >>> update_stocks(stocks: list, s12542, s.XXXX)
+        POST:
+        {
+          "stocks": [
+            {
+              "offer_id": "PH11042",
+              "product_id": 313455276,
+              "stock": 100,
+              "warehouse_id": 22142605386000
+            }
+          ]
+        }
+        --
+        RESULT:
+        {
+          "result": [
+            {
+              "warehouse_id": 22142605386000,
+              "product_id": 118597312,
+              "offer_id": "PH11042",
+              "updated": true,
+              "errors": []
+            }
+          ]
+        }
+
+    Args:
+        client_id: Идентификатор клиента
+        seller_token: API-ключ
+        stocks: информация о товарах на складах.
+
+    Returns:
+        [result]: Изменение информации о количестве товара в наличии
+
+    Note:
+        - Изменяет информацию о количестве товара в наличии;
+        - в случае ошибки будет выброшено исключение.
+    """
     url = "https://api-seller.ozon.ru/v1/product/import/stocks"
     headers = {
         "Client-Id": client_id,
