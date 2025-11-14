@@ -302,7 +302,7 @@ def download_stock():
 
 
 def create_stocks(watch_remnants, offer_ids):
-    """Создадим остатки, Пример: {"offer_id": "PH11042",  "stock": 100}
+    """Создадим остатки
 
     Функция формирует информацию о количестве товаров в наличии, 
     сверяя актуальную информацию от поставшика `watch_remnants`.
@@ -312,11 +312,13 @@ def create_stocks(watch_remnants, offer_ids):
 
     Example:
         >>> create_stocks(watch_remnants, offer_ids)
-
+        {"offer_id": "136748",  "stock": 100}
+        {"offer_id": "112348",  "stock": 4}
+        {"offer_id": "112748",  "stock": 0}
 
     Args:
         offer_ids - список артикулов с сайта озон
-        watch_remnants - список словарей, содержашем данные о товарах Casio
+        watch_remnants - список словарей, содержаших данные о товарах Casio
 
     Returns:
         [stocks]: Возвращается количество товаров
@@ -344,6 +346,33 @@ def create_stocks(watch_remnants, offer_ids):
 
 
 def create_prices(watch_remnants, offer_ids):
+    """Создадим цены
+
+    Функция формирует информацию о цене товаров в наличии, 
+    сверяя актуальную информацию от поставшика `watch_remnants`.
+    Сверка формируется на основе артикулов товаров,
+    которые уже есть на сайте озон  - `offer_ids`.
+
+    Example:
+        >>> create_prices(watch_remnants, offer_ids)
+        price = {
+            "auto_action_enabled": "UNKNOWN",
+            "currency_code": "RUB",
+            "offer_id": "136748",
+            "old_price": "0",
+            "price": "1448",
+        }
+
+    Args:
+        offer_ids - список артикулов с сайта озон
+        watch_remnants - список словарей, содержаших данные о товарах Casio
+
+    Returns:
+        [stocks]: Возвращается стоимость товаров
+
+    Note:
+        -  Словарь содержит стоимость товаров Cisco
+    """
     prices = []
     for watch in watch_remnants:
         if str(watch.get("Код")) in offer_ids:
