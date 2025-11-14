@@ -69,7 +69,34 @@ def get_product_list(last_id, client_id, seller_token):
 
 
 def get_offer_ids(client_id, seller_token):
-    """Получить артикулы товаров магазина озон"""
+    """Получить артикулы товаров магазина озон, Пример: "offer_id": "136748"
+
+    Принимает на вход несколько аргументов, в результете выполнения,
+    позволяет получить артикулы товаров.
+
+    Example:
+        >>> get_offer_ids(s12542, s.XXXX)
+        "items": [
+          {
+            ...
+            "offer_id": "136748",
+            ...
+          }
+        ],
+        "total": 1,
+        "last_id": "bnVсbA=="
+
+    Args:
+        client_id: Идентификатор клиента
+        seller_token: API-ключ
+
+    Returns:
+        [offer_ids]: список артикулов товаров
+
+    Note:
+        - Возвращает список артикулов* товаров магазина озон,
+          *offer_id - идентификатор товара в системе продавца — артикул.
+    """
     last_id = ""
     product_list = []
     while True:
