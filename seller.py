@@ -12,7 +12,44 @@ logger = logging.getLogger(__file__)
 
 
 def get_product_list(last_id, client_id, seller_token):
-    """Получить список товаров магазина озон"""
+    """Получить список товаров магазина озон.
+
+    Принимает на вход несколько переменных, позволет получить
+    словарь, содержащий товары и их характеристики
+
+    Example:
+        >>> get_product_list("", s12542, s.XXXX)
+        "items": [
+          {
+            "archived": true,
+            "has_fbo_stocks": true,
+            "has_fbs_stocks": true,
+            "is_discounted": true,
+            "offer_id": "136748",
+            "product_id": 223681945,
+            "quants": [
+              {
+                "quant_code": "string",
+                "quant_size": 0
+              }
+            ]
+          }
+        ],
+        "total": 1,
+        "last_id": "bnVсbA=="
+
+    Args:
+        client_id: Идентификатор клиента
+        seller_token: API-ключ
+        last_id: идентификатор последнего значения на странице
+
+    Returns:
+        [result]: словарь, содержащий список тваров с их характеристиками
+
+    Note:
+        - Возвращает товары и их характеристикими;
+        - в случае ошибки будет выброшено исключение.
+    """
     url = "https://api-seller.ozon.ru/v2/product/list"
     headers = {
         "Client-Id": client_id,
