@@ -219,10 +219,11 @@ def update_stocks(stocks: list, client_id, seller_token):
         stocks: информация о товарах на складах.
 
     Returns:
-        [result]: Изменение информации о количестве товара в наличии
+        [result]: Возврашает результат обновления информации о количестве
+                  товара в наличии
 
     Note:
-        - Изменяет информацию о количестве товара в наличии;
+        - Изменяет информацию о количестве товара в наличии (формат json);
         - в случае ошибки будет выброшено исключение.
     """
     url = "https://api-seller.ozon.ru/v1/product/import/stocks"
@@ -302,9 +303,9 @@ def download_stock():
 
 
 def create_stocks(watch_remnants, offer_ids):
-    """Создадим остатки
+    """Создает остатки.
 
-    Функция формирует информацию о количестве товаров в наличии, 
+    Функция формирует информацию о количестве товаров в наличии,
     сверяя актуальную информацию от поставшика `watch_remnants`.
     Сверка формируется на основе артикулов товаров,
     которые уже есть на сайте озон  - `offer_ids`.
@@ -346,7 +347,7 @@ def create_stocks(watch_remnants, offer_ids):
 
 
 def create_prices(watch_remnants, offer_ids):
-    """Создадим цены
+    """Создает цены
 
     Функция формирует информацию о цене товаров в наличии, 
     сверяя актуальную информацию от поставшика `watch_remnants`.
@@ -453,7 +454,7 @@ def divide(lst: list, n: int):
 async def upload_prices(watch_remnants, client_id, seller_token):
     """Обновляет цену.
 
-    Функция позволяет обновить цены на товары Cisco на сайте озон.
+    Функция позволяет обновить цены товаров Cisco на сайте озон.
 
     Example:
         >>> upload_prices(watch_remnants, client_id, seller_token)
@@ -464,7 +465,7 @@ async def upload_prices(watch_remnants, client_id, seller_token):
         seller_token: API-ключ
 
     Returns:
-        [prices]: возвращает стоимость на товары Casio
+        [prices]: возвращает стоимость товаров Casio
 
     Note:
         - Стоимоть товаров с учетом обновления;
@@ -507,7 +508,7 @@ async def upload_stocks(watch_remnants, client_id, seller_token):
 
 
 def main():
-    """Запуск функций для создания и обновления списка товаров и цен.
+    """Запуск функций для обновления списка товаров и цен.
 
     1. Функция читает переменные окружения и передает в вызываемые функции:
         - client_id (идентификатор клиента)
@@ -519,12 +520,12 @@ def main():
         []
 
     Returns:
-        [stocks]: возвращает количество товаров Casio
+        []
 
     Note:
         []
 
-    """    
+    """
     env = Env()
     seller_token = env.str("SELLER_TOKEN")
     client_id = env.str("CLIENT_ID")
