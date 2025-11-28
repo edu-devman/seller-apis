@@ -39,9 +39,9 @@ def get_product_list(last_id, client_id, seller_token):
         "last_id": "bnVсbA=="
 
     Args:
-        client_id: Идентификатор клиента
-        seller_token: API-ключ
-        last_id: идентификатор последнего значения на странице
+        client_id: Идентификатор клиента;
+        seller_token: API-ключ;
+        last_id: идентификатор последнего значения на странице.
 
     Returns:
         [result]: словарь, содержащий список тваров с их характеристиками
@@ -69,10 +69,7 @@ def get_product_list(last_id, client_id, seller_token):
 
 
 def get_offer_ids(client_id, seller_token):
-    """Получить артикулы товаров магазина озон, Пример: "offer_id": "136748"
-
-    Принимает на вход несколько аргументов, в результете выполнения,
-    позволяет получить артикулы товаров.
+    """Получить артикулы товаров магазина озон, Пример: "offer_id": "136748".
 
     Example:
         >>> get_offer_ids(s12542, s.XXXX)
@@ -87,8 +84,8 @@ def get_offer_ids(client_id, seller_token):
         "last_id": "bnVсbA=="
 
     Args:
-        client_id: Идентификатор клиента
-        seller_token: API-ключ
+        client_id: Идентификатор клиента;
+        seller_token: API-ключ.
 
     Returns:
         [offer_ids]: список артикулов товаров
@@ -155,8 +152,8 @@ def update_price(prices: list, client_id, seller_token):
         }
 
     Args:
-        client_id: Идентификатор клиента
-        seller_token: API-ключ
+        client_id: Идентификатор клиента;
+        seller_token: API-ключ;
         prices: информация о ценах товаров.
 
     Returns:
@@ -178,7 +175,7 @@ def update_price(prices: list, client_id, seller_token):
 
 
 def update_stocks(stocks: list, client_id, seller_token):
-    """Обновить остатки
+    """Обновить остатки.
 
     Позволяет изменить информацию о количестве товара в наличии,
     где prices: list - формируется в функции create_stocks
@@ -214,8 +211,8 @@ def update_stocks(stocks: list, client_id, seller_token):
         }
 
     Args:
-        client_id: Идентификатор клиента
-        seller_token: API-ключ
+        client_id: Идентификатор клиента;
+        seller_token: API-ключ;
         stocks: информация о товарах на складах.
 
     Returns:
@@ -238,7 +235,7 @@ def update_stocks(stocks: list, client_id, seller_token):
 
 
 def download_stock():
-    """Скачать файл ostatki с сайта casio
+    """Скачать файл ostatki с сайта casio.
 
     Функция загружает zip-архив по указанному URL, извлекает из него
     файл "ostatki.xls", читает этот Excel-файл начиная
@@ -318,8 +315,8 @@ def create_stocks(watch_remnants, offer_ids):
         {"offer_id": "112748",  "stock": 0}
 
     Args:
-        offer_ids - список артикулов с сайта озон
-        watch_remnants - список словарей, содержаших данные о товарах Casio
+        offer_ids: Список артикулов с сайта озон;
+        watch_remnants: список словарей, содержаших данные о товарах Casio.
 
     Returns:
         [stocks]: Возвращается количество товаров
@@ -347,9 +344,9 @@ def create_stocks(watch_remnants, offer_ids):
 
 
 def create_prices(watch_remnants, offer_ids):
-    """Создает цены
+    """Создает цены.
 
-    Функция формирует информацию о цене товаров в наличии, 
+    Функция формирует информацию о цене товаров в наличии,
     сверяя актуальную информацию от поставшика `watch_remnants`.
     Сверка формируется на основе артикулов товаров,
     которые уже есть на сайте озон  - `offer_ids`.
@@ -365,8 +362,8 @@ def create_prices(watch_remnants, offer_ids):
         }
 
     Args:
-        offer_ids - список артикулов с сайта озон
-        watch_remnants - список словарей, содержаших данные о товарах Casio
+        offer_ids: Список артикулов с сайта озон;
+        watch_remnants: список словарей, содержаших данные о товарах Casio.
 
     Returns:
         [stocks]: Возвращается стоимость товаров
@@ -389,7 +386,7 @@ def create_prices(watch_remnants, offer_ids):
 
 
 def price_conversion(price: str) -> str:
-    """Преобразовать цену. Пример: 5'990.00 руб. -> 5990
+    """Преобразовать цену. Пример: 5'990.00 руб. -> 5990.
 
     Функция удаляет все нецифровые символы и дробную часть, возвращая
     только целые числа в виде строки.
@@ -426,7 +423,7 @@ def price_conversion(price: str) -> str:
 
 
 def divide(lst: list, n: int):
-    """Разделить список lst на части по n элементов
+    """Разделить список lst на части по n элементов.
 
     Функция позволяет разделить список (prices или stocks) на n части
     элементов.
@@ -435,8 +432,8 @@ def divide(lst: list, n: int):
     (https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductsStocksV2)
 
     Args:
-        lst list: Словарь элементов
-        n int: Число константа - `100`
+        lst list: Словарь элементов;
+        n int: число константа - `100`.
 
     Returns:
         lst: Возвращает скорректированный список элеметов
@@ -452,17 +449,17 @@ def divide(lst: list, n: int):
 
 
 async def upload_prices(watch_remnants, client_id, seller_token):
-    """Обновляет цену.
+    """Загрузить список цен.
 
-    Функция позволяет обновить цены товаров Cisco на сайте озон.
+    Функция позволяет загрузить список цен товаров Cisco на сайт озон.
 
     Example:
         >>> upload_prices(watch_remnants, client_id, seller_token)
 
     Args:
-        watch_remnants: Список цен для товаров Casio
-        client_id: Идентификатор клиента
-        seller_token: API-ключ
+        watch_remnants: Список цен для товаров Casio;
+        client_id: идентификатор клиента;
+        seller_token: API-ключ.
 
     Returns:
         [prices]: возвращает стоимость товаров Casio
@@ -479,17 +476,17 @@ async def upload_prices(watch_remnants, client_id, seller_token):
 
 
 async def upload_stocks(watch_remnants, client_id, seller_token):
-    """Обновляет количество товаров.
+    """Загрузить список товаров.
 
-    Функция позволяет обновить количество товаров Cisco на сайте озон.
+    Функция позволяет загрузить список товаров Cisco на сайт озон.
 
     Example:
         >>> upload_stocks(watch_remnants, client_id, seller_token)
 
     Args:
-        watch_remnants: Список цен для товаров Casio
-        client_id: Идентификатор клиента
-        seller_token: API-ключ
+        watch_remnants: Список цен для товаров Casio;
+        client_id: идентификатор клиента;
+        seller_token: API-ключ.
 
     Returns:
         [stocks]: возвращает количество товаров Casio
